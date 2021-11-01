@@ -1,6 +1,6 @@
 import itertools
 l = ["bababc","abbcde"]
-l = [line.strip() for line in open("02.input.txt", 'r')]
+l = [line.strip() for line in open("input.txt", 'r')]
 # print(l)
 def cnt1(line):
     d=dict()
@@ -26,7 +26,7 @@ l = ["abcde",
 "axcye",
 "wvxyz"]
 
-l = [line.strip() for line in open("02.input.txt", 'r')]
+l = [line.strip() for line in open("input.txt", 'r')]
 def common(line1,line2):
     s=""
     for el in zip(line1,line2):

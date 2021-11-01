@@ -1,7 +1,7 @@
 import itertools
 # l = [+3, +3, +4, -2, -4]
 
-l = [int(line.strip()) for line in open("01.txt", 'r')]
+l = [int(line.strip()) for line in open("input.txt", 'r')]
 print(l)
 
 sln1 = sum(l) 

@@ -26,12 +26,9 @@ def fill(no,l,t,w,h):
                 if no in untouched:
                     untouched.remove(no)
             la[j][i]=no
-
 for line in inp:
-    (no,c,pos,siz) = re.split(" ",line)
-    (l,t)=re.split(",",pos[:-1])
-    (w,h)=re.split("x",siz) 
-    fill(int(no[1:]),int(l),int(t),int(w),int(h))
+    (no,l,t,w,h) = map(int,re.findall(r'\d+',line))
+    fill(no,l,t,w,h)
 
 cnt=0
 for line in a:

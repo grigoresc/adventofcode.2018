@@ -4,18 +4,18 @@ import itertools
 l = [int(line.strip()) for line in open("input.txt", 'r')]
 print(l)
 
-sln1 = sum(l) 
+sln1 = sum(l)
 print(sln1)
 
-c=itertools.cycle(l)
+c = itertools.cycle(l)
 
-a=0
+a = 0
 s = []
 for x in c:
-   a += x
-   if a in s:
-       print(a)
-       break
-   else:
+    a += x
+    if a in s:
+        print(a)
+        break
+    else:
         s.append(a)
         print(a)

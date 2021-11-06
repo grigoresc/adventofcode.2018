@@ -1,3 +1,4 @@
+
 import re
 import itertools
 
@@ -19,9 +20,9 @@ txt = """[1518-11-01 00:00] Guard #10 begins shift
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up"""
 
-
 inp = [line.strip() for line in txt.split('\n')]
-# inp = [line.strip() for line in open("input.txt", 'r')]
+inp = [line.strip() for line in open("input.txt", 'r')]
+inp.sort()
 
 
 def parse(line):
@@ -78,3 +79,42 @@ for line in inp:
 print(rec)
 guards = set(map(lambda x: x["guard"], rec.values()))
 print(guards)
+
+
+def maxhrs(g):
+    days = list(map(lambda x: x['mins'], filter(
+        lambda x: x["guard"] == g, rec.values())))
+    s = sum(map(sum, days))
+    return s
+
+
+# fg=max(map(lambda g:(g,maxhrs(g)),guards),lambda x:x[1],0)
+maxv = max(map(lambda g: maxhrs(g), guards))
+maxg = filter(lambda g: maxhrs(g) == maxv, guards)
+realg = list(maxg)[0]
+print(realg)
+
+
+def combinehrs(g):
+    days = list(map(lambda x: x['mins'], filter(
+        lambda x: x["guard"] == g, rec.values())))
+    print(days)
+    sumhrs = [0 for i in range(0, 60)]
+    for day in days:
+        sumhrs = zip(sumhrs, day)
+        sumhrs = list(map(lambda x: x[0]+x[1], sumhrs))
+    return sumhrs
+
+
+ch = combinehrs(realg)
+maxv = 0
+for i, c in enumerate(ch):
+    if c > maxv:
+        maxv = c
+        maxi = i
+
+print(maxv, maxi)
+
+sln1 = maxi*realg
+print(sln1)
+# 94542

@@ -1,6 +1,5 @@
 
 import re
-import itertools
 
 txt = """[1518-11-01 00:00] Guard #10 begins shift
 [1518-11-01 00:05] falls asleep
@@ -54,7 +53,7 @@ def parse(line):
             "lines": [],
             "mins": [0 for i in range(0, 60)]
         }
-    # rec[date]["lines"].append(line)
+
     if not g is None:
         rec[date]["guard"] = g
 
@@ -76,28 +75,25 @@ rec = dict()
 for line in inp:
     parse(line)
 
-print(rec)
 guards = set(map(lambda x: x["guard"], rec.values()))
-print(guards)
+# print(guards)
 
 
-def maxhrs(g):
+def totalMinutes(g):
     days = list(map(lambda x: x['mins'], filter(
         lambda x: x["guard"] == g, rec.values())))
     s = sum(map(sum, days))
     return s
 
 
-maxv = max(map(lambda g: maxhrs(g), guards))
-maxg = filter(lambda g: maxhrs(g) == maxv, guards)
-realg = list(maxg)[0]
-print(realg)
+maxv = max(map(lambda g: totalMinutes(g), guards))
+maxg = next(filter(lambda g: totalMinutes(g) == maxv, guards))
+# print(maxg)
 
 
-def combinehrs(g):
+def sumsPerMinute(g):
     days = list(map(lambda x: x['mins'], filter(
         lambda x: x["guard"] == g, rec.values())))
-    print(days)
     sumhrs = [0 for i in range(0, 60)]
     for day in days:
         sumhrs = zip(sumhrs, day)
@@ -105,28 +101,28 @@ def combinehrs(g):
     return sumhrs
 
 
-ch = combinehrs(realg)
+sums = sumsPerMinute(maxg)
 maxv = 0
-for i, c in enumerate(ch):
+for i, c in enumerate(sums):
     if c > maxv:
         maxv = c
         maxi = i
 
-print(maxv, maxi)
+# print(maxv, maxi)
 
-sln1 = maxi*realg
+sln1 = maxi * maxg
 print(sln1)
 # 94542
 
-
 maxv = 0
 for g in guards:
-    ch = combinehrs(g)
-    for i, c in enumerate(ch):
+    sums = sumsPerMinute(g)
+    for i, c in enumerate(sums):
         if c > maxv:
             maxv = c
             maxh = i
             maxg = g
-print(maxv, maxh, maxg)
+# print(maxv, maxh, maxg)
 sln2 = maxh*maxg
 print(sln2)
+# 50966

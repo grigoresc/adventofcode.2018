@@ -88,7 +88,6 @@ def maxhrs(g):
     return s
 
 
-# fg=max(map(lambda g:(g,maxhrs(g)),guards),lambda x:x[1],0)
 maxv = max(map(lambda g: maxhrs(g), guards))
 maxg = filter(lambda g: maxhrs(g) == maxv, guards)
 realg = list(maxg)[0]
@@ -118,3 +117,16 @@ print(maxv, maxi)
 sln1 = maxi*realg
 print(sln1)
 # 94542
+
+
+maxv = 0
+for g in guards:
+    ch = combinehrs(g)
+    for i, c in enumerate(ch):
+        if c > maxv:
+            maxv = c
+            maxh = i
+            maxg = g
+print(maxv, maxh, maxg)
+sln2 = maxh*maxg
+print(sln2)

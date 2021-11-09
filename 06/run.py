@@ -2,12 +2,12 @@
 from functools import reduce
 import re
 from typing import Counter
-txt = """1, 1
-1, 6
-8, 3
-3, 4
-5, 5
-8, 9"""
+# txt = """1, 1
+# 1, 6
+# 8, 3
+# 3, 4
+# 5, 5
+# 8, 9"""
 
 # inp = [line.strip() for line in txt.split('\n')]
 inp = [line.strip() for line in open("input.txt", 'r')]
@@ -90,3 +90,20 @@ m = max(list(filter(lambda x: x[0] not in margins, list(
 sln = m[1]
 print(sln)
 # 3620
+
+
+def CalcTotalDistance(x, y):
+    t = 0
+    for py, px in coords:
+        t += abs(y-py)+abs(x-px)
+        # print(py, px, t)
+    return t
+
+
+sz = 0
+for y in range(1, leng):
+    for x in range(1, leng):
+        if CalcTotalDistance(x, y) < 10000:
+            sz += 1
+print(sz)
+# 39930

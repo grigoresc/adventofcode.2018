@@ -1,57 +1,37 @@
+from collections import deque
+
 marbles = dict()
+marbles = deque()
 
 
-def insert(currentM, newM):
+def add(newM):
     global marbles
-    el1M = marbles[currentM]['nextM']
-    el2M = marbles[el1M]['nextM']
-    marbles[newM] = {'m': newM, 'nextM': el2M, 'prevM': el1M}
-    marbles[el1M]['nextM'] = newM
-    marbles[el2M]['prevM'] = newM
+    marbles.rotate(-2)
+    marbles.appendleft(newM)
 
 
-def pop(currentM):
+def remove():
     global marbles
-    m = marbles[currentM]['m']
-    beforeM = marbles[currentM]['prevM']
-    afterM = marbles[currentM]['nextM']
-    marbles[beforeM]['nextM'] = marbles[afterM]['m']
-    marbles[afterM]['prevM'] = marbles[beforeM]['m']
-    marbles[currentM] = None
-    return (m, afterM)
+    marbles.rotate(7)
+    retDele = marbles.popleft()
+    return retDele
 
 
-def printM(start):
+def sln(playersno, marblesno):
     global marbles
-    current = start
-    while True:
-        print(current)
-        current = marbles[current]['nextM']
-        if current == start:
-            break
+    marbles = deque()
+    marbles.append(0)
 
-
-def sln2(playersno, marblesno):
-    global marbles
-    marbles = dict()
-    marbles[0] = {'m': 0, 'nextM': 0, 'prevM': 0}
-
-    insert(0, 1)
-
-    current = 1
-    currentPlayer = 2
+    currentPlayer = 1
     playerscores = [0 for i in range(0, playersno)]
-    for m in range(2, marblesno+1):
+    for m in range(1, marblesno+1):
         if m % 23 == 0:
             playerscores[currentPlayer] += m
-            for i in range(0, 7):
-                current = marbles[current]['prevM']
 
-            (retdele, current) = pop(current)
+            retdele = remove()
             playerscores[currentPlayer] += retdele
         else:
-            insert(current, m)
-            current = m
+            add(m)
 
         currentPlayer += 1
         currentPlayer = currentPlayer % playersno
@@ -61,13 +41,14 @@ def sln2(playersno, marblesno):
 
 
 # samples
-assert sln2(9, 25) == 32
-assert sln2(10, 1618) = 8317
-assert sln2(13, 7999) == 146373
-assert sln2(17, 1104) == 2764
-assert sln2(21, 6111) == 54718
-assert sln2(30, 5807) == 37305
+assert sln(9, 25) == 32
+
+assert sln(10, 1618) == 8317
+assert sln(13, 7999) == 146373
+assert sln(17, 1104) == 2764
+assert sln(21, 6111) == 54718
+assert sln(30, 5807) == 37305
 # input part 1
-assert sln2(459, 72103) == 388131
+assert sln(459, 72103) == 388131
 # input part 2
-assert sln2(459, 72103*100) == 3239376988
+assert sln(459, 72103*100) == 3239376988

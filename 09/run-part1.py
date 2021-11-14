@@ -4,9 +4,6 @@ def sln1(playersno, marblesno):
     currentPlayer = 2
     playerscores = [0 for i in range(0, playersno)]
     for m in range(2, marblesno+1):
-        # if m % 50000 == 0:
-        #     print(">", m, len(circle), max(
-        #         playerscores), current, currentPlayer)
         if m % 23 == 0:
             playerscores[currentPlayer] += m
             delepos = current - 7
@@ -26,9 +23,7 @@ def sln1(playersno, marblesno):
         current = nextpos
         currentPlayer += 1
         currentPlayer = currentPlayer % playersno
-    # print(playerscores)
     print(max(playerscores))
-    # print(circle)
 
 
 # samples
@@ -41,4 +36,3 @@ sln1(30, 5807)
 # input
 sln1(459, 72103)
 # 388131
-sln1(459, 72103*100)

@@ -55,11 +55,13 @@ def sln2(playersno, marblesno):
 
         currentPlayer += 1
         currentPlayer = currentPlayer % playersno
-    print(max(playerscores))
+    sln = max(playerscores)
+    print(sln)
+    return sln
 
 
 # samples
-sln2(9, 25)
+assert sln2(9, 25) == 32
 sln2(10, 1618)
 sln2(13, 7999)
 sln2(17, 1104)

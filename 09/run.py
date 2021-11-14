@@ -62,13 +62,12 @@ def sln2(playersno, marblesno):
 
 # samples
 assert sln2(9, 25) == 32
-sln2(10, 1618)
-sln2(13, 7999)
-sln2(17, 1104)
-sln2(21, 6111)
-sln2(30, 5807)
-# input
-sln2(459, 72103)
-# 388131
-sln2(459, 72103*100)
-# 3239376988
+assert sln2(10, 1618) = 8317
+assert sln2(13, 7999) == 146373
+assert sln2(17, 1104) == 2764
+assert sln2(21, 6111) == 54718
+assert sln2(30, 5807) == 37305
+# input part 1
+assert sln2(459, 72103) == 388131
+# input part 2
+assert sln2(459, 72103*100) == 3239376988
